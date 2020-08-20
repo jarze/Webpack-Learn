@@ -1,17 +1,18 @@
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+import path from "path";
+import { Configuration } from "webpack";
+import HtmlWebpackPlugin from "html-webpack-plugin";
 
-module.exports = {
+const config: Configuration = {
   entry: "./src/index.js",
   output: {
     path: path.resolve(__dirname, "dist"),
-    // library: "MyLibrary",
     filename: "bundle.js",
   },
   module: {
     rules: [
       { test: /\.css$/, loader: "style-loader!css-loader" },
       { test: /\.(js|jsx)$/, loader: "babel-loader" },
+      { test: /\.(ts|tsx)$/, loader: "ts-loader" },
     ],
   },
   plugins: [
@@ -28,11 +29,6 @@ module.exports = {
       // template: "index.html",
     }),
   ],
-  // devServer: {
-  //   compress: true,
-  //   port: 9000,
-  //   proxy: {
-  //     "/api": "http://localhost:3000",
-  //   },
-  // },
 };
+
+export default config;

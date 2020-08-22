@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "webpack-dev-server --mode=development",
+    "start": "webpack-dev-server --open --mode=development",
     "build": "webpack --mode=production"
   },
   "dependencies": {
@@ -10,6 +10,8 @@
     "babel-loader": "^8.1.0",
     "css-loader": "^4.2.1",
     "html-webpack-plugin": "^4.3.0",
+    "less": "^3.12.2",
+    "less-loader": "^6.2.0",
     "style-loader": "^1.2.1",
     "ts-node": "^8.10.2",
     "tsconfig-paths": "^3.9.0",
@@ -23,7 +25,7 @@
   },
   "name": "webpack-demo",
   "version": "1.0.0",
-  "description": "webpack aplication",
+  "description": "webpack application",
   "main": "webpack.config.js",
   "author": "",
   "license": "ISC"

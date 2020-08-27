@@ -1,12 +1,8 @@
-/*
- * @Autor: jarze
- * @Date: 2020-08-26 14:53:48
- * @Desc: Do not edit
- */
 import path from "path";
 import process from "process";
 import { Configuration, ConfigurationFactory } from "webpack";
 import HtmlWebpackPlugin from "html-webpack-plugin";
+import { CleanWebpackPlugin } from "clean-webpack-plugin";
 
 // env: mock|dev|test|prod
 const config: ConfigurationFactory = (env, args) => ({
@@ -43,9 +39,12 @@ const config: ConfigurationFactory = (env, args) => ({
     ],
   },
   plugins: [
+    // 清理打包
+    new CleanWebpackPlugin(),
+    // 生成html
     new HtmlWebpackPlugin({
       // 打包输出HTML
-      title: (env as string) || "sad",
+      title: (env as string) || "hello world",
       // minify: {
       //   // 压缩HTML文件
       //   removeComments: true, // 移除HTML中的注释

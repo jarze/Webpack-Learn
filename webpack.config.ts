@@ -1,14 +1,15 @@
 /*
  * @Autor: jarze
- * @Date: 2020-08-08 17:11:32
- * @Desc: config
+ * @Date: 2020-08-26 14:53:48
+ * @Desc: Do not edit
  */
 import path from "path";
 import process from "process";
-import { Configuration } from "webpack";
+import { Configuration, ConfigurationFactory } from "webpack";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 
-const config: Configuration = {
+// env: mock|dev|test|prod
+const config: ConfigurationFactory = (env, args) => ({
   entry: "./src/index.js",
   output: {
     path: path.resolve(__dirname, "dist"),
@@ -35,20 +36,24 @@ const config: Configuration = {
       },
       { test: /\.(js|jsx)$/, loader: "babel-loader" },
       { test: /\.(ts|tsx)$/, loader: "ts-loader" },
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        use: ["file-loader"],
+      },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
       // 打包输出HTML
-      title: "Hello World app",
+      title: (env as string) || "sad",
       // minify: {
       //   // 压缩HTML文件
       //   removeComments: true, // 移除HTML中的注释
       //   collapseWhitespace: true, // 删除空白符与换行符
       //   minifyCSS: true, // 压缩内联css
       // },
-      filename: "index.html",
-      template: "./public/index.html",
+      // filename: "index.html",
+      // template: "./public/index.html",
     }),
   ],
   devtool: process.env.mode === "development" ? "source-map" : false,
@@ -68,9 +73,9 @@ const config: Configuration = {
       return assetFilename.endsWith(".js");
     },
   },
-
   node: {},
-};
+  devServer,
+});
 
 //webpack-dev-server
 const devServer = {
@@ -84,4 +89,4 @@ const devServer = {
   // progress:
 };
 
-export default { devServer, ...config };
+export default config;

@@ -3,7 +3,8 @@
     "start": "webpack-dev-server --mode=development",
     "start:mock": "webpack-dev-server --mode=development --env=mock",
     "build": "webpack --mode=production",
-    "build:node": "ts-node scripts/node.js"
+    "build:node": "ts-node scripts/node.js",
+    "json": "webpack --json >stats.json"
   },
   "dependencies": {
     "@babel/core": "^7.12.10",

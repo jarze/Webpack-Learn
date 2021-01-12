@@ -20,8 +20,9 @@ const config: ConfigurationFactory = (env, args) => ({
     path: path.resolve(__dirname, "dist"),
     filename: "[name].[hash].js",
   },
-  //devtool: "inline-source-map",
+  // externals: [],
   module: {
+    // loader 总是从右到左地被调用
     rules: [
       { test: /\.css$/, loader: "style-loader!css-loader" },
       {
@@ -39,12 +40,14 @@ const config: ConfigurationFactory = (env, args) => ({
         //   },
         // ],
       },
+      // 自定义loader测试
+      {
+        test: /test-loader\.(js|jsx)$/,
+        loader: "babel-loader!./loader/xx-loader.js?query-test=111",
+      },
       { test: /\.(js|jsx)$/, loader: "babel-loader" },
       { test: /\.(ts|tsx)$/, loader: "ts-loader" },
-      {
-        test: /\.(png|svg|jpg|gif)$/,
-        use: ["file-loader"],
-      },
+      { test: /\.(png|svg|jpg|gif)$/, use: ["file-loader"] },
     ],
   },
   plugins: [

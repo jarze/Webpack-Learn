@@ -3,22 +3,24 @@
 function formateParams(
   t,
   data = [
-    "version",
-    "context",
-    "request",
-    "query",
-    "data",
-    "loaderIndex",
-    "resource",
-    "resourcePath",
-    "resourceQuery",
-    "target",
-    "webpack",
+    'version',
+    'context',
+    'request',
+    'query',
+    'data',
+    'loaderIndex',
+    'resource',
+    'resourcePath',
+    'resourceQuery',
+    'target',
+    'webpack',
   ]
 ) {
   return data
-    .map(item => `<dl><dt>this.${item}</dt><dd>${t[item]}</dd></dl>`)
-    .join("");
+    .map(
+      (item) => `<code><dl><dt>this.${item}</dt><dd>${t[item]}</dd></dl></code>`
+    )
+    .join('');
 }
 
 module.exports = function (content, map, meta) {
@@ -26,7 +28,7 @@ module.exports = function (content, map, meta) {
   this.callback(
     null,
     content.replace(
-      "test-loader",
+      'test-loader',
       `测试自定义loader：替换文案(test-loader)xx-loader-test-loader；<br />(pitch)this.data.value: ${
         this.data.value
       } </br>${formateParams(this)}`
@@ -83,9 +85,9 @@ module.exports.pitch = function (remainingRequest, precedingRequest, data) {
   if (false) {
     // 如果某个 loader 在 pitch 方法中给出一个结果，那么这个过程会回过身来，并跳过剩下的 loader。在我们上面的例子中，如果 b-loader 的 pitch 方法返回了一些东西：
     return (
-      "module.exports = require(" +
-      JSON.stringify("-!" + remainingRequest) +
-      ");"
+      'module.exports = require(' +
+      JSON.stringify('-!' + remainingRequest) +
+      ');'
     );
     // 上面的步骤将被缩短为：
     // |- a-loader `pitch`

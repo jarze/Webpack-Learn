@@ -1,9 +1,32 @@
 .test {
-	color: red;
-	background: aquamarine url('../assets/panda-waving.png') no-repeat right bottom;
+  color: red;
+  background: aquamarine url('../assets/panda-waving.png') no-repeat right
+    bottom;
 }
 
 .test1 {
-	color: olivedrab;
-	background: peachpuff url('../assets/panda-waving.png') no-repeat right bottom;
+  .my-mixin;
+  background: peachpuff url('../assets/panda-waving.png') no-repeat right bottom;
+}
+
+.my-mixin {
+  color: olivedrab;
+}
+
+.ascii-block-grid {
+  font-size: 10px;
+  line-height: 1;
+  width: min-content;
+  margin: 1rem auto;
+  display: grid;
+  gap: 0;
+  grid-template-columns: 1fr;
+
+  @media (min-width: 92ch) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (min-width: 138ch) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 }

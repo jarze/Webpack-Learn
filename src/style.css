@@ -1,5 +1,50 @@
+:root {
+  --bg: repeating-linear-gradient(
+    135deg,
+    #8baaaa,
+    #ae8b9c 5%,
+    #dcd9d4 2.5%,
+    black 7.5%,
+    #537895 7.5%,
+    #09203f 12.5%,
+    #a8caba 12.5%,
+    #5d4157 15%
+  );
+  --textColor: #fff;
+}
+
+html {
+  font-family: fantasy, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+}
+
 body {
-	background: beige;
-	white-space: pre-wrap;
-	margin: 10em
+  background: var(--bg);
+  color: var(--textColor);
+  white-space: pre-wrap;
+  line-height: 2;
+  margin: 2em 8em;
+}
+
+body {
+  counter-reset: section;
+}
+h1 {
+  counter-reset: subsection;
+}
+h1:before {
+  counter-increment: section;
+  content: '🤡 ' counter(section) ' 🌸 ';
+}
+h2:before {
+  counter-increment: subsection;
+  content: counter(section) '.' counter(subsection) ' 🌸 ';
+}
+
+code,
+pre {
+  font-family: Consolas, Andale Mono WT, Andale Mono, Lucida Console,
+    Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono,
+    Liberation Mono, Nimbus Mono L, Monaco, Courier New, Courier, monospace;
 }

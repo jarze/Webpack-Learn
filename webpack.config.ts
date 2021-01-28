@@ -3,7 +3,7 @@ import path from 'path';
 import {
   // Configuration,
   ConfigurationFactory,
-  DefinePlugin,
+  DefinePlugin
   // optimize,
 } from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
@@ -17,11 +17,11 @@ const XXPlugin = require('./plugin/xx-plugin.js');
 const config: ConfigurationFactory = (env, args) => ({
   entry: {
     index: './src/index.js',
-    another: './src/index1.js',
+    another: './src/index1.js'
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].[hash].js',
+    filename: '[name].[hash].js'
   },
   // externals: [],
   module: {
@@ -30,7 +30,7 @@ const config: ConfigurationFactory = (env, args) => ({
       { test: /\.css$/, loader: 'style-loader!css-loader' },
       {
         test: /\.less$/,
-        loader: 'style-loader!css-loader!less-loader',
+        loader: 'style-loader!css-loader!less-loader'
         // use: [
         //   {
         //     loader: "style-loader",
@@ -47,11 +47,32 @@ const config: ConfigurationFactory = (env, args) => ({
       {
         test: /test-loader\.(js|jsx)$/,
         loader: 'babel-loader!./loader/xx-loader.js?query-test=111',
+        include: path.resolve('src')
       },
-      { test: /\.(js|jsx)$/, loader: 'babel-loader' },
-      { test: /\.(ts|tsx)$/, loader: 'ts-loader' },
-      { test: /\.(png|svg|jpg|gif)$/, use: ['file-loader'] },
-    ],
+      {
+        test: /\.(js|jsx)$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/
+      },
+      { test: /\.(ts|tsx)$/, use: ['ts-loader'] },
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name() {
+                if (args.mode === 'development') {
+                  return '[path][name].[ext]';
+                }
+                return '[hash].[ext]';
+              },
+              outputPath: 'static/images/'
+            }
+          }
+        ]
+      }
+    ]
   },
   plugins: [
     // 清理打包
@@ -71,12 +92,12 @@ const config: ConfigurationFactory = (env, args) => ({
       template: './public/index.html',
       templateParameters: {
         env,
-        title: JSON.stringify(args.mode) + env,
-      },
+        title: JSON.stringify(args.mode) + env
+      }
     }),
     new DefinePlugin({
       //指定环境
-      'process.env.NODE_ENV': JSON.stringify(args.mode),
+      'process.env.NODE_ENV': JSON.stringify(args.mode)
     }),
     // 静态目录直接打包输出
     new CopyWebpackPlugin({ patterns: [{ from: 'static/**' }] }),
@@ -86,7 +107,7 @@ const config: ConfigurationFactory = (env, args) => ({
     // }),
 
     // 自定义plugin测试
-    new XXPlugin({ options: true }),
+    new XXPlugin({ options: true })
   ],
   devtool: args.mode === 'development' ? 'source-map' : false,
   // externals: {
@@ -99,14 +120,14 @@ const config: ConfigurationFactory = (env, args) => ({
     // 入口起点的最大体积
     maxEntrypointSize: 10000000,
     // // 单个资源体积
-    maxAssetSize: 800000,
+    maxAssetSize: 800000
     // // 只给出 .js 文件的性能提示
     // assetFilter: function (assetFilename) {
     //   return assetFilename.endsWith(".js");
     // },
   },
   node: {},
-  devServer,
+  devServer
 });
 
 //webpack-dev-server
@@ -115,14 +136,14 @@ const devServer = {
   //静态文件
   // contentBase: [path.join(__dirname, "public"), path.join(__dirname, "static")],
   headers: {
-    'X-Custom-Foo': 'bar',
+    'X-Custom-Foo': 'bar'
   },
   proxy: {
     '/api': {
       target: 'http://localhost:3000',
-      pathRewrite: { '^/api': '' },
-    },
-  },
+      pathRewrite: { '^/api': '' }
+    }
+  }
   // progress:
 };
 

@@ -10,17 +10,15 @@ import xxLoader from './test-loader';
 // css-loader
 require('./style.css');
 
-document.write(`<div>🔥 ${process.env.NODE_ENV}</div><br/>`);
-
 document.write(`<hr />`);
 
 document.write('<h1>---------- webpack ----------</h1>');
 
 document.write('it works');
-document.write(`<hr />`);
+document.write(`<br />`);
 
 document.write(require('./bar.js'));
-document.write(`<hr />`);
+document.write(`<br />`);
 
 document.write(a.a);
 document.write(`<br />`);
@@ -28,7 +26,16 @@ document.write(`<br />`);
 //  测试 tree shaking
 // https://www.webpackjs.com/guides/tree-shaking/
 document.write(cube(10));
+
 document.write(`<hr />`);
+
+document.write('<h1>DefinePlugin ----- 配置全局常量😄😄😄</h1>');
+
+document.write(
+  `<div>🔥 ${process.env.NODE_ENV} --- ${process.env.env} --- ${VERSION}</div><br/>`
+);
+
+document.write(`<hr />`); 
 
 document.write('<h1>tsFun ----- ts-loader😄😄😄</h1>');
 

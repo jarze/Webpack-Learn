@@ -97,7 +97,9 @@ const config: ConfigurationFactory = (env, args) => ({
     }),
     new DefinePlugin({
       //指定环境
-      'process.env.NODE_ENV': JSON.stringify(args.mode)
+      'process.env.NODE_ENV': JSON.stringify(args.mode),
+      'process.env.env': JSON.stringify(env),
+      VERSION: JSON.stringify('5fa3b9')
     }),
     // 静态目录直接打包输出
     new CopyWebpackPlugin({ patterns: [{ from: 'static/**' }] }),

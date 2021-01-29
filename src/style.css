@@ -48,3 +48,15 @@ pre {
     Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono,
     Liberation Mono, Nimbus Mono L, Monaco, Courier New, Courier, monospace;
 }
+
+hr {
+  border-style: dashed;
+  opacity: 0.5;
+}
+
+h1 {
+  border-left: 2em solid rgba(255, 184, 194, 0.4);
+  text-indent: -1em;
+  border-top-left-radius: 1em;
+  border-bottom-left-radius: 1em;
+}

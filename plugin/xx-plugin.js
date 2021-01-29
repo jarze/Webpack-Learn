@@ -45,7 +45,7 @@ const compilerHooks = [
   'afterResolvers',
   // SyncBailHook
   // 在 entry 配置项处理过之后，执行插件。
-  'entryOption',
+  'entryOption'
 ];
 
 // 一个 JavaScript 命名函数。
@@ -57,7 +57,7 @@ function XXPlugin(options) {
 XXPlugin.prototype.apply = function (compiler) {
   for (const hook of compilerHooks) {
     if (!compiler.hooks[hook]) continue;
-    compiler.hooks[hook].tap('XXPlugin', (params) => {
+    compiler.hooks[hook].tap('XXPlugin', params => {
       console.log(`1-------|以同步方式触及 ${hook} 钩子。`);
     });
     // try {

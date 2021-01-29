@@ -13,12 +13,12 @@ function formateParams(
     'resourcePath',
     'resourceQuery',
     'target',
-    'webpack',
+    'webpack'
   ]
 ) {
   return data
     .map(
-      (item) => `<code><dl><dt>this.${item}</dt><dd>${t[item]}</dd></dl></code>`
+      item => `<code><dl><dt>this.${item}</dt><dd>${t[item]}</dd></dl></code>`
     )
     .join('');
 }

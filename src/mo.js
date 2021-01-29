@@ -1,5 +1,5 @@
 export default {
-  a: 'test--mm-12--121--122',
+  a: 'test--mm-12--121--122'
 };
 
 export function cube(x) {
